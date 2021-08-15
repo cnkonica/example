@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	logback.xml的基本配置信息都包含在configuration标签中，
+	需要含有至少一个appender标签用于指定日志输出方式和输出格式，
+	root标签为系统默认日志进程，通过level指定日志级别，
+	通过appender-ref关联前面指定顶的日志输出方式。
+ -->
+<!-- 定义 每隔10秒中扫描该文件 -->
+<configuration scan="true" scanPeriod="10 seconds" debug="false">
+    <!--定义日志输出目录-->
+    <conversionRule conversionWord="traceId" converterClass="com.cnkonica.commons.trace.TraceIdLogConverter"/>
+    <property name="LOG_HOME" value="/apps/logs/example"/>
+    <property name="SYSTEM" value="example"/>
+
+    <!-- 控制台输出的日志格式 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread][%traceId] %-5level %logger{100} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <!-- 输出error log 至统一日志文件中 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${SYSTEM}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${SYSTEM}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 根据日志文件按天回滚，保存时间为30天，30天之前的都将被清理掉 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread][%traceId] %-5level %logger{100} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <logger name="com.cnkonica.example" level="debug"/>
+    <logger name="org.apache.zookeeper" level="error"/>
+    <logger name="com.alibaba.dubbo.remoting.exchange" level="error"/>
+    <logger name="com.mchange" level="error"/>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
+

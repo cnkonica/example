@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="resultInterceptor" class="com.cnkonica.commons.interceptor.CommonResultInterceptor"/>
+    <bean id="traceInterceptor" class="com.cnkonica.commons.interceptor.InvocationTraceInterceptor"/>
+    <bean id="apiDigestInterceptor" class="com.cnkonica.commons.interceptor.InvocationDigestInterceptor"
+          c:logger = "api-digest-log" p:appName = "example"/>
+
+    <bean id="bizDigestInterceptor" class="com.cnkonica.commons.interceptor.InvocationDigestInterceptor"
+          c:logger = "biz-digest-log" p:appName = "example"/>
+    <bean id="dalDigestInterceptor" class="com.cnkonica.commons.interceptor.InvocationDigestInterceptor"
+          c:logger = "dal-digest-log" p:appName = "example"/>
+    <bean id="salDigestInterceptor" class="com.cnkonica.commons.interceptor.InvocationDigestInterceptor"
+          c:logger = "sal-digest-log" p:appName = "example"/>
+    <aop:config>
+        <aop:pointcut id="apiPointcut" expression="execution(public * com.cnkonica.example.api..*.*(..))"/>
+        <aop:pointcut id="apiImplPointcut" expression="execution(public * com.cnkonica.example.biz.api..*.*(..))"/>
+        <aop:pointcut id="bizPointcut" expression="execution(public * com.cnkonica.example.biz.service..*.*(..))
+        or execution(public * com.cnkonica.example.repository.service..*.*(..))"/>
+        <aop:pointcut id="dalPointcut" expression="execution(public * com.cnkonica.example.repository.dao..*.*(..))"/>
+        <aop:pointcut id="salPointcut" expression="execution(public * com.cnkonica.example.sal..*.*(..))"/>
+        <aop:advisor pointcut-ref="apiPointcut" advice-ref="apiDigestInterceptor"/>
+        <aop:advisor pointcut-ref="apiPointcut" advice-ref="resultInterceptor" order="1"/>
+        <aop:advisor pointcut-ref="apiImplPointcut" advice-ref="traceInterceptor"/>
+        <aop:advisor pointcut-ref="bizPointcut" advice-ref="bizDigestInterceptor"/>
+        <aop:advisor pointcut-ref="bizPointcut" advice-ref="traceInterceptor"/>
+        <aop:advisor pointcut-ref="dalPointcut" advice-ref="dalDigestInterceptor"/>
+        <aop:advisor pointcut-ref="salPointcut" advice-ref="salDigestInterceptor"/>
+    </aop:config>
+
+</beans>
