@@ -32,12 +32,12 @@
             <charset>UTF-8</charset>
         </encoder>
     </appender>
-    <logger name="com.cnkonica.example" level="debug"/>
+    <logger name="com.cnkonica.example" level="debug" />
     <logger name="org.apache.zookeeper" level="error"/>
     <logger name="com.alibaba.dubbo.remoting.exchange" level="error"/>
     <logger name="com.mchange" level="error"/>
 
-    <root level="debug">
+    <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
     </root>

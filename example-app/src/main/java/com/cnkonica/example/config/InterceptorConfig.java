@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class InterceptorConfig {
-    public static final String TRACE_PATH="execution(public * com.cnkonica.example.service.impl..*.*(..))";
+    public static final String TRACE_PATH="execution(public * com.cnkonica.example.biz.**.impl..*.*(..))";
 
     @Bean
     public DefaultPointcutAdvisor implPointcutAdvisor(InvocationTraceInterceptor interceptor) {

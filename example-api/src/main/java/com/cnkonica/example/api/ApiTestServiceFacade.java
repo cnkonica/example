@@ -1,5 +1,7 @@
 package com.cnkonica.example.api;
 
+import base.GlobalResponse;
+
 public interface ApiTestServiceFacade {
-    public void run();
+    GlobalResponse<String> run();
 }

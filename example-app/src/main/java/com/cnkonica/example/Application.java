@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 @ImportResource(locations = {"classpath:spring-application.xml"})
-@MapperScan(basePackages = "com.cnkonica.example.**.dao")
+@MapperScan(basePackages = "com.cnkonica.example.**.mapper")
 @Slf4j
 public class Application {
     public static void main(String[] args) {

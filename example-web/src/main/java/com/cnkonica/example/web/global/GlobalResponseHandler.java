@@ -1,5 +1,7 @@
 package com.cnkonica.example.web.global;
 
+import base.GlobalResponse;
+import com.cnkonica.example.biz.utils.Results;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +27,7 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
                                   ServerHttpResponse response) {
         String returnTypeName = returnType.getParameterType().getName();
         if ("void".equals(returnTypeName)) {
-            return new GlobalResponse<>().success();
+            return Results.success();
         }
         if (!MediaType.APPLICATION_JSON.equals(selectedContentType)) {
             return body;
@@ -34,7 +36,7 @@ public class GlobalResponseHandler implements ResponseBodyAdvice<Object> {
         if (GlobalResponse.class.getName().equals(returnTypeName)) {
             return body;
         }
-        return new GlobalResponse<>().success(body);
+        return Results.success(body);
 
     }
 }

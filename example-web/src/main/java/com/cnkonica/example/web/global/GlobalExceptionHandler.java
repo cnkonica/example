@@ -1,6 +1,8 @@
 package com.cnkonica.example.web.global;
 
+import base.GlobalResponse;
 import com.cnkonica.commons.exception.CommonException;
+import com.cnkonica.example.biz.utils.Results;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -23,13 +25,14 @@ public class GlobalExceptionHandler {
         logger.error(ex.getMessage(), ex);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        GlobalResponse response = new GlobalResponse().error("服务器异常，请联系管理员");
+        GlobalResponse<Object> response = Results.error("服务器异常，请联系管理员");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(headers).body(response);
     }
 
     public GlobalResponse businessException(CommonException e) {
         logger.error(e.getMessage(), e);
-        return new GlobalResponse().error(e.getCode(), e.getMessage());
+        return Results.error(e.getCode(),e.getMessage());
+
     }
 
 

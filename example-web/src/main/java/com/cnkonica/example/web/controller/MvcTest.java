@@ -1,8 +1,8 @@
 package com.cnkonica.example.web.controller;
 
 import com.cnkonica.example.biz.service.RunService;
-import com.cnkonica.example.web.global.GlobalResponse;
-import com.cnkonica.example.web.global.Results;
+import base.GlobalResponse;
+import com.cnkonica.example.biz.utils.Results;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

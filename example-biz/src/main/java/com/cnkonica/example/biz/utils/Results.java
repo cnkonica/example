@@ -1,12 +1,13 @@
-package com.cnkonica.example.web.global;
+package com.cnkonica.example.biz.utils;
 
+import base.GlobalResponse;
 import com.cnkonica.commons.result.ResultCode;
 import com.cnkonica.example.common.BizResultCode;
 
 public class Results {
     private Results(){}
 
-    private static <T> GlobalResponse<T> of(String code, String message,T t) {
+    private static <T> GlobalResponse<T> of(String code, String message, T t) {
         return new GlobalResponse<>(code, message, t);
     }
     public static <T> GlobalResponse<T> success(T data) {
