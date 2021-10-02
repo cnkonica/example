@@ -23,4 +23,9 @@ public class MvcTest {
         runService.run();
         return Results.success();
     }
+    @RequestMapping("/pgsqlTest")
+    public GlobalResponse pgsqlTest(){
+        runService.pgTest();
+        return Results.success();
+    }
 }

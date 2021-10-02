@@ -37,6 +37,20 @@
     <logger name="com.alibaba.dubbo.remoting.exchange" level="error"/>
     <logger name="com.mchange" level="error"/>
 
+
+    <!-- jpa log start -->
+    <logger name="org.hibernate.sql" additivity="false" level="DEBUG">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false" level="TRACE" >
+        <level value="TRACE" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <!-- jpa log end -->
+
     <root level="info">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>

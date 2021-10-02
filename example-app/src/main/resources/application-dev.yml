@@ -1,0 +1,15 @@
+dubbo:
+    application:
+        name: example
+    protocol:
+        host: 192.168.0.116
+        port: 20880
+    registry:
+        address: 192.168.199.134:2181
+example:
+    jdbc:
+        driverClass: com.mysql.jdbc.Driver
+        maxActive: 500
+        password: root
+        url: jdbc:mysql://192.168.199.134:3306/example?useUnicode=yes&characterEncoding=utf-8&useLegacyDatetimeCode=false
+        username: root

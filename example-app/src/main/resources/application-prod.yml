@@ -1,0 +1,33 @@
+dubbo:
+    application:
+        name: example
+    protocol:
+        host: ''
+        port: 20880
+    registry:
+        address: 192.168.199.134:2181
+example:
+    mysql:
+        driverClass: com.mysql.jdbc.Driver
+        maxActive: 500
+        password: root
+        url: jdbc:mysql://192.168.199.134:3306/example?useUnicode=yes&characterEncoding=utf-8&useLegacyDatetimeCode=false
+        username: root
+    postgres:
+        driverClass: org.postgresql.Driver
+        maxActive: 500
+        password: root
+        url: jdbc:postgresql://192.168.199.134:5432/example
+        username: root
+spring:
+    jpa:
+        hibernate:
+            ddl-auto: none
+        show-sql: true
+        properties:
+            hibernate:
+                primary-dialect: org.hibernate.dialect.MySQL5Dialect
+                secondary-dialect: org.hibernate.dialect.PostgreSQLDialect
+            temp:
+                use_jdbc_metadata_defaults: false
+

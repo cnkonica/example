@@ -19,7 +19,7 @@
         <module>example-api</module>
         <module>example-biz</module>
         <module>example-common</module>
-        <module>example-repository</module>
+        <module>example-dao</module>
         <module>example-sal</module>
         <module>example-web</module>
     </modules>
@@ -32,13 +32,13 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
